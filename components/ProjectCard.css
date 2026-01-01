@@ -1,0 +1,300 @@
+.project-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-border-light);
+}
+
+.mega-card-image-container {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--color-bg-secondary);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.mega-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+/* Gallery Controls */
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all var(--transition-fast);
+    z-index: 2;
+}
+
+.mega-card-image-container:hover .gallery-nav {
+    opacity: 1;
+}
+
+.gallery-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-nav.prev {
+    left: 10px;
+}
+
+.gallery-nav.next {
+    right: 10px;
+}
+
+.gallery-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.indicator.active,
+.indicator:hover {
+    background: white;
+    transform: scale(1.2);
+}
+
+.project-card:hover .mega-card-image {
+    transform: scale(1.05);
+}
+
+.mega-card-content {
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    flex: 1;
+}
+
+
+
+.project-category {
+    display: inline-block;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.project-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-primary);
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+}
+
+.project-link-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-tertiary);
+    transition: all var(--transition-fast);
+    padding: 4px;
+    border-radius: var(--radius-full);
+}
+
+.project-link-icon:hover {
+    color: var(--color-primary);
+    background-color: var(--color-bg-tertiary);
+    transform: translateY(-2px);
+}
+
+.project-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+.project-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.highlights-list {
+    padding-left: var(--spacing-lg);
+    margin-top: var(--spacing-sm);
+}
+
+
+.highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.highlight-icon {
+    color: var(--color-success);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.project-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+/* Read More & Actions */
+.project-description-container {
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+}
+
+.read-more-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    padding: 4px;
+    margin: 0 auto;
+    display: block;
+    transition: all var(--transition-fast);
+    border-radius: 50%;
+}
+
+.read-more-btn:hover {
+    color: var(--color-primary);
+    background-color: var(--color-bg-tertiary);
+    transform: translateY(2px);
+}
+
+.project-actions {
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    justify-content: flex-start;
+}
+
+.visit-site-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.visit-site-btn:hover {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.project-impact {
+    padding: var(--spacing-md);
+    background: var(--color-bg-tertiary);
+    border-left: 3px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.project-impact strong {
+    color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+    .project-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .mega-card-image-container {
+        height: 200px;
+    }
+}
+
+/* Nested Card Design for Sections */
+.mega-card-section {
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.mega-card-section:last-child {
+    margin-bottom: 0;
+}
+
+.mega-card-section h4 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.mega-card-details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Removed side-by-side grid layout to keep sections stacked vertically */
+/* @media (min-width: 768px) {
+    .mega-card-details-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: var(--spacing-lg);
+        align-items: start;
+    }
+} */

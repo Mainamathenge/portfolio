@@ -1,0 +1,75 @@
+.education-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.education-status {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: white;
+}
+
+.education-degree {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-primary);
+    padding-right: 100px;
+}
+
+.education-institution {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.education-period {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--spacing-md);
+}
+
+.education-grade {
+    font-size: var(--font-size-sm);
+    color: var(--color-accent);
+    font-weight: 500;
+    margin-bottom: var(--spacing-md);
+}
+
+.education-focus {
+    padding: var(--spacing-md);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.education-focus strong {
+    color: var(--color-text-primary);
+}
+
+.education-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .education-degree {
+        font-size: var(--font-size-lg);
+        padding-right: 0;
+    }
+
+    .education-status {
+        position: static;
+        display: inline-block;
+        margin-bottom: var(--spacing-sm);
+    }
+}
