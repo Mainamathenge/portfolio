@@ -40,7 +40,7 @@ function Footer() {
     return (
         <footer className="footer">
             <div className="container">
-                <p>&copy; {new Date().getFullYear()} {portfolioData.personal.name}. Built with Next.js and Gemini AI.</p>
+                <p>&copy; {new Date().getFullYear()} {portfolioData.personal.name}</p>
             </div>
         </footer>
     );
