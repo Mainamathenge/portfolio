@@ -8,6 +8,9 @@ const model = genAI.getGenerativeModel({
     model: 'models/gemini-2.5-flash'
 });
 
+const FALLBACK_RESPONSE =
+    "I don’t have that information in my knowledge base. For more details or clarification, feel free to reach out to Joseph at mainamathengej@gmail.com.";
+
 export async function POST(request) {
     try {
         const { message } = await request.json();
@@ -21,6 +24,11 @@ export async function POST(request) {
 
         // Build RAG context based on the question
         const ragContext = buildRagContext(message);
+
+        // If no context is available at all, return controlled fallback
+        if (!ragContext || ragContext.trim().length === 0) {
+            return NextResponse.json({ answer: FALLBACK_RESPONSE });
+        }
 
         // Create prompt with RAG context
         const prompt = `
@@ -39,27 +47,18 @@ MODE SELECTION:
 
 RULES:
 - Use ONLY the information in the CONTEXT below.
-- If the answer is not in the context, say: "I don't have that information in my knowledge base."
+- Do NOT guess, infer, or fabricate information.
 - Be concise, factual, and professional.
-- ALWAYS format responses using bullet points and headings.
-- NEVER write long paragraphs.
-- Do NOT use prose or paragraphs under any heading.
-- If a section has no applicable information, omit it entirely.
 
-SPECIAL INSTRUCTION:
-If the QUESTION contains a job description or asks about role fit:
-- Compare job requirements against the CONTEXT
-- Do not assume missing skills
-- End with a clear recommendation
+LIMITATION HANDLING:
+- If the requested information is NOT present in the CONTEXT:
+  - Respond using the LIMITATION RESPONSE TEMPLATE exactly
+  - Do NOT add headings, bullet points, summaries, or extra suggestions
 
-CONTACT GUIDANCE:
-- When redirecting a user to contact Joseph:
-  - Use a friendly and professional tone
-  - Prefer email as the primary contact method
-  - Optionally mention phone contact if appropriate
-  - Encourage the user to continue exploring the portfolio
+LIMITATION RESPONSE TEMPLATE (use verbatim):
+"I don’t have that information in my knowledge base. For more details or clarification, feel free to reach out to Joseph at mainamathengej@gmail.com."
 
-FORMAT:
+FORMAT (ONLY when the answer exists in the CONTEXT):
 ## Summary
 - One or two bullets only
 
@@ -72,9 +71,16 @@ FORMAT:
 ## Gaps or Unknowns
 - Bullet points only
 
-- When discussing projects, include:
-  - Technologies
-  - Scale or impact
+SPECIAL INSTRUCTION:
+If the QUESTION contains a job description or asks about role fit:
+- Compare job requirements against the CONTEXT
+- Do not assume missing skills
+- End with a clear recommendation
+
+CONTACT GUIDANCE (ONLY if the user explicitly asks how to contact Joseph):
+- Use a friendly and professional tone
+- Prefer email as the primary contact method
+- Optionally mention phone contact if appropriate
 
 CONTEXT:
 ${ragContext}
@@ -83,18 +89,14 @@ QUESTION:
 ${message}
 `;
 
-
-
         // Get response from Gemini
         const result = await model.generateContent(prompt);
         const answer = result.response.text();
 
         return NextResponse.json({ answer });
-
     } catch (error) {
         console.error('Chat API Error:', error);
 
-        // Handle specific error types
         if (error.message?.includes('API key')) {
             return NextResponse.json(
                 { error: 'API configuration error. Please check server configuration.' },
