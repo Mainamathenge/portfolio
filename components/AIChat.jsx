@@ -160,12 +160,6 @@ export default function AIChat({ inline = false }) {
                         </div>
                     )}
 
-                    {error && (
-                        <div className="chat-error">
-                            ⚠️ {error}
-                        </div>
-                    )}
-
                     <div className="chat-messages">
                         {messages.map((message, index) => (
                             <div key={index} className={`message message-${message.role}`}>

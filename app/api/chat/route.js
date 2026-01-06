@@ -5,7 +5,7 @@ import { buildRagContext } from '@/lib/rag/buildContext';
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 const model = genAI.getGenerativeModel({
-    model: 'models/gemini-2.5-flash'
+    model: 'gemini-2.5-flash'
 });
 
 const FALLBACK_RESPONSE =
